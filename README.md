@@ -36,31 +36,21 @@ Users can:
 ---
 
 ## 📂 Project Structure
+```
 ├── main.html
-
 ├── login.html
-
 ├── signup.html
-
 ├── calendar.html
-
 ├── health tracker page.html
-
 ├── NutriFit.html
-
 ├── journal.html
-
 ├── chatbot page.html
-
 ├── education.html
-
 ├── music and books page.html
-
 ├── faqs page.html
-
 ├── login.py
-
 └── users.db
+```
 
 ## ⚙️ Installation & Setup
 1. Clone the Repository
