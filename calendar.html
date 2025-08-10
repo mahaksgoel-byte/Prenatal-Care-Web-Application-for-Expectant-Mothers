@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BabySteps - Appointment Calendar</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --powder-blue: #B0E0E6;
+            --baby-pink: #FFB6C1;
+            --light-powder-blue: #F0F8FF;
+            --light-baby-pink: #FFF0F5;
+            --text-primary: #4A4A4A;
+            --text-secondary: #6a1b9a;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--light-powder-blue);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: auto 1fr;
+        }
+
+        nav {
+            width: 250px;
+            background-color: #e3e9ff;
+            color: #333;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 30px;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+            z-index: 100;
+        }
+
+        nav a {
+            width: 90%;
+            text-decoration: none;
+            color: #6a1b9a;
+            font-size: 1.2em;
+            padding: 15px;
+            text-align: center;
+            border-radius: 10px;
+            margin: 10px 0;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #fce4ec;
+            transform: scale(1.05);
+        }
+
+        nav a.active {
+            background-color: #f8bbd0;
+            font-weight: bold;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 2rem;
+            width: calc(100% - 250px);
+        }
+
+        .welcome-section {
+            background: linear-gradient(90deg, var(--powder-blue), var(--baby-pink));
+            border-radius: 20px;
+            padding: 2rem;
+            color: white;
+            text-align: center;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .welcome-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .welcome-section p {
+            font-size: 1.2rem;
+            font-style: italic;
+        }
+
+        .two-column-layout {
+            display: flex;
+            gap: 20px;
+        }
+
+        .calendar-container {
+            flex: 1;
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .appointment-list-container {
+            width: 300px;
+            background: white;
+            border-radius: 20px;
+            padding: 1rem;
+            box-shadow: var(--shadow);
+            height: fit-content;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .calendar-header h1 {
+            font-size: 2rem;
+        }
+
+        .calendar-header button {
+            background: var(--baby-pink);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .calendar-header button:hover {
+            background: #ff7c9e;
+        }
+
+        .appointment-form {
+            margin-bottom: 2rem;
+        }
+
+        .appointment-form input,
+        .appointment-form select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .appointment-form button {
+            background: var(--baby-pink);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .appointment-form button:hover {
+            background: var(--powder-blue);
+        }
+
+        .appointment-list {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .appointment-list h2 {
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .appointment-item {
+            background: var(--light-powder-blue);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s;
+        }
+
+        .appointment-item:hover {
+            transform: scale(1.02);
+        }
+
+        .appointment-item .details {
+            font-size: 1rem;
+        }
+
+        .appointment-item .details h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .appointment-item button {
+            background: var(--baby-pink);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .appointment-item button:hover {
+            background: #ff7c9e;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        @media (max-width: 900px) {
+            .two-column-layout {
+                flex-direction: column;
+            }
+            
+            .appointment-list-container {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+                padding: 1rem;
+            }
+
+            nav {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="main.html">Home</a>
+        <a href="health tracker page.html">Health Trackers</a>
+        <a href="calendar.html" class="active">Appointment Calendar</a>
+        <a href="education.html">Education</a>
+        <a href="journal.html">Journal</a>
+        <a href="NutriFit.html">NutriFit</a>
+        <a href="music and books page.html">Music & Books</a>
+        <a href="faqs page.html">FAQs</a>
+        <a href="chatbot page.html">Chat with Zoee</a>
+    </nav>
+
+    <div class="main-content">
+        <div class="welcome-section">
+            <h2>Welcome to Your Appointment Calendar</h2>
+            <p>Stay on top of all your appointments and track upcoming visits with ease.</p>
+        </div>
+
+        <div class="two-column-layout">
+            <div class="calendar-container">
+                <div class="calendar-header">
+                    <h1>Appointment Calendar</h1>
+                </div>
+
+                <div class="appointment-form">
+                    <input type="text" id="appointmentTitle" placeholder="Where are you going? (e.g., Doctor Check-up)">
+                    <input type="date" id="appointmentDate" required>
+                    <input type="time" id="appointmentTime" required>
+                    <input type="text" id="appointmentLocation" placeholder="Location (e.g., AIIMS Hospital)">
+                    <button onclick="addAppointment()">Add Appointment</button>
+                </div>
+            </div>
+
+            <div class="appointment-list-container">
+                <div class="appointment-list" id="appointmentList">
+                    <h2>Your Appointments</h2>
+                    <p>Click "Display Appointments" to view your scheduled appointments.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p>Appointment added successfully!</p>
+        </div>
+    </div>
+
+    <script>
+        async function addAppointment() {
+            const title = document.getElementById('appointmentTitle').value;
+            const date = document.getElementById('appointmentDate').value;
+            const time = document.getElementById('appointmentTime').value;
+            const location = document.getElementById('appointmentLocation').value;
+            const user_id = localStorage.getItem("user_id") || "default_user";
+
+            if (!title || !date || !time || !location) {
+                alert('Please fill in all fields.');
+                return;
+            }
+
+            const appointmentData = { title, date, time, location, user_id };
+
+            try {
+                const response = await fetch("http://127.0.0.1:5000/appointments", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(appointmentData)
+                });
+
+                const result = await response.json();
+                if (response.ok) {
+                    document.getElementById('successModal').style.display = "block";
+                    displayAppointments();
+                } else {
+                    alert(result.message);
+                }
+            } catch (error) {
+                console.error("Error adding appointment:", error);
+                
+                document.getElementById('successModal').style.display = "block";
+                
+                displayAppointmentsFallback();
+            }
+
+            document.getElementById('appointmentTitle').value = '';
+            document.getElementById('appointmentDate').value = '';
+            document.getElementById('appointmentTime').value = '';
+            document.getElementById('appointmentLocation').value = '';
+        }
+
+        async function displayAppointments() {
+            const user_id = localStorage.getItem("user_id") || "default_user";
+
+            try {
+              const response = await fetch(`http://127.0.0.1:5000/getappointments?user_id=${user_id}`);
+const appointments = await response.json();
+
+
+                const appointmentList = document.getElementById('appointmentList');
+                appointmentList.innerHTML = '<h2>Your Appointments</h2>'; // Reset the list
+
+                if (appointments.length > 0) {
+                    appointments.forEach(appointment => {
+                        const appointmentItem = document.createElement('div');
+                        appointmentItem.className = 'appointment-item';
+                        appointmentItem.innerHTML = `
+                            <div class="details">
+                                <h3>${appointment.title}</h3>
+                                <p>Date: ${appointment.date} | Time: ${appointment.time}</p>
+                                <p>Location: ${appointment.location}</p>
+                            </div>
+                        `;
+                        appointmentList.appendChild(appointmentItem);
+                    });
+                } else {
+                    appointmentList.innerHTML += '<p>No appointments found.</p>';
+                }
+            } catch (error) {
+                console.error("Error fetching appointments:", error);
+                
+                displayAppointmentsFallback();
+            }
+        }
+
+        function displayAppointmentsFallback() {
+            const appointmentList = document.getElementById('appointmentList');
+            appointmentList.innerHTML = '<h2>Your Appointments</h2>'; 
+           
+            let appointments = JSON.parse(localStorage.getItem("appointments") || "[]");
+            
+            const title = document.getElementById('appointmentTitle').value;
+            const date = document.getElementById('appointmentDate').value;
+            const time = document.getElementById('appointmentTime').value;
+            const location = document.getElementById('appointmentLocation').value;
+            
+            if (title && date && time && location) {
+                appointments.push({ title, date, time, location });
+                localStorage.setItem("appointments", JSON.stringify(appointments));
+            }
+            
+            if (appointments.length > 0) {
+                appointments.forEach(appointment => {
+                    const appointmentItem = document.createElement('div');
+                    appointmentItem.className = 'appointment-item';
+                    appointmentItem.innerHTML = `
+                        <div class="details">
+                            <h3>${appointment.title}</h3>
+                            <p>Date: ${appointment.date} | Time: ${appointment.time}</p>
+                            <p>Location: ${appointment.location}</p>
+                        </div>
+                    `;
+                    appointmentList.appendChild(appointmentItem);
+                });
+            } else {
+                appointmentList.innerHTML += '<p>No appointments found.</p>';
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('successModal').style.display = "none";
+        }
+
+        const navLinks = document.querySelectorAll('nav a');
+        const currentPage = window.location.pathname.split('/').pop();
+
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === currentPage) {
+                link.classList.add('active');
+            }
+        });
+
+        window.onload = function() {
+            displayAppointments();
+        };
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BabySteps V2 - Nutrition</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --powder-blue: #B0E0E6;
+            --baby-pink: #FFB6C1;
+            --light-powder-blue: #F0F8FF;
+            --light-baby-pink: #FFF0F5;
+            --text-primary: #4A4A4A;
+            --text-secondary: #6a1b9a;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --gradient-pink: linear-gradient(135deg, #FFB6C1, #FF69B4);
+            --gradient-blue: linear-gradient(135deg, #B0E0E6, #87CEEB);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--light-powder-blue);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: auto 1fr;
+        }
+
+        nav {
+            width: 250px;
+            background-color: #e3e9ff;
+            color: #333;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 30px;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+        }
+
+        nav a {
+            width: 90%;
+            text-decoration: none;
+            color: #6a1b9a;
+            font-size: 1.2em;
+            padding: 15px;
+            text-align: center;
+            border-radius: 10px;
+            margin: 10px 0;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #fce4ec;
+            transform: scale(1.05);
+        }
+
+        nav a.active {
+            background-color: #f8bbd0;
+            font-weight: bold;
+        }
+
+        .main-content {
+            margin-left: 260px;
+            padding: 2rem;
+            width: calc(100% - 260px);
+        }
+
+        .nutrition-header {
+            background: linear-gradient(90deg, var(--powder-blue), var(--baby-pink));
+            border-radius: 20px;
+            padding: 2rem;
+            color: white;
+            text-align: center;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            animation: fadeIn 1s ease-out;
+            width: 100%;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .nutrition-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .nutrition-header p {
+            font-size: 1.2rem;
+        }
+
+        .meal-form {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .meal-form h3 {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .meal-form input, .meal-form select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+             margin-bottom : 1rem;
+        }
+
+        .meal-form button {
+            background: var(--gradient-pink);
+            color: rgb(180, 119, 162);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .meal-form button:hover {
+            background: var(--gradient-blue);
+        }
+
+        .timeline {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1rem 0;
+            border-left: 2px solid var(--baby-pink);
+            margin-left: 1rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--baby-pink);
+        }
+
+        .activity-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .activity-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .activity-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .quick-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .action-button {
+            background: var(--light-baby-pink);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .action-button:hover {
+            background: var(--baby-pink);
+            color: rgb(109, 42, 79);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+                padding: 1rem;
+            }
+
+            nav {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 1rem;
+            }
+
+            .activity-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="main.html">Home</a>
+        <a href="health tracker page.html">Health Trackers</a>
+        <a href="calendar.html">Appointment Calendar</a>
+        <a href="education.html">Education</a>
+        <a href="journal.html">Journal</a>
+        <a href="NutriFit.html" class="active">NutriFit</a>
+        <a href="music and books page.html">Music & Books</a>
+        <a href="faqs page.html">FAQs</a>
+        <a href="chatbot page.html">Chat with Zoee</a>
+    </nav>
+
+    <div class="main-content">
+        <div class="nutrition-header">
+            <h1>Welcome to Your Nutrition Tracker</h1>
+            <p>Track your daily intake, maintain a healthy diet, and stay on top of your nutritional goals.</p>
+        </div>
+
+        <div class="meal-form">
+            <h3>Add a Meal</h3>
+            <select id="mealType">
+                <option value="breakfast">Breakfast</option>
+                <option value="lunch">Lunch</option>
+                <option value="dinner">Dinner</option>
+                <option value="snacks">Snacks</option>
+            </select>
+            <input type="date" id="mealDate" required>
+            <input type="time" id="mealTime" required>
+            <input type="text" id="mealName" placeholder="Meal Name" required>
+            <button onclick="addMeal()">Add Meal</button>
+            <button onclick="displayMeals()">Display Meals</button>
+        </div>
+
+        <div class="timeline">
+ <h2>Nutrition Log</h2>
+            <div id="nutritionLog">
+            </div>
+        </div>
+
+        <div class="activity-grid">
+            <div class="activity-card">
+                <img src="https://th.bing.com/th/id/OIP.74mFpRgyGHis0GWH9wqcPwHaLH?rs=1&pid=ImgDetMain" alt="Meal Plan">
+                <h3>Your Meal Plan</h3>
+                <p>Personalized nutrition recommendations</p>
+                <div class="quick-actions">
+                    <button class="action-button">
+                        <i class="fas fa-utensils"></i>
+                        <a href="https://www.australianeggs.org.au/nutrition/meal-plans/pregnancy-meal-plan">View Plan</a>
+                    </button>
+                </div>
+            </div>
+
+            <div class="activity-card">
+                <img src="https://th.bing.com/th/id/OIP.Vnm5uPgR82zdRXbHQBRV-QHaEd?rs=1&pid=ImgDetMain" alt="Nutritional Tips">
+                <h3>Pregnancy Nutrition Tips</h3>
+                <p>Expert advice for each trimester</p>
+                <button class="action-button">
+                    <i class="fas fa-book-reader"></i>
+                    <a href="https://www.nhs.uk/pregnancy/keeping-well/have-a-healthy-diet/">Read More</a>
+                </button>
+            </div>
+
+            <div class="activity-card">
+                <img src="https://th.bing.com/th/id/OIP.OWg0nQjaQwbQPFdiuQgCGQHaE7?rs=1&pid=ImgDetMain" alt="Exercise Library">
+                <h3>Exercise Library</h3>
+                <p>Safe pregnancy workouts by trimester</p>
+                <button class="action-button">
+                    <i class="fas fa-dumbbell"></i>
+                    <a href="https://www.physio-pedia.com/Antenatal_Exercises">Browse Exercises</a>
+                </button>
+            </div>
+
+            <div class="activity-card">
+                <img src="https://th.bing.com/th/id/OIP.FLoCvv6CzTO4VtacNMwf9QHaFj?rs=1&pid=ImgDetMain" alt="Weekly Plan">
+                <h3>Weekly Plan</h3>
+                <p>Trimester wise weekly workout schedule</p>
+                <button class="action-button">
+                    <i class="fas fa-calendar-alt"></i>
+                    <a href="https://www.nourishmovelove.com/pregnancy-workout-plans/">View Schedule</a>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function addMeal() {
+            const mealType = document.getElementById('mealType').value;
+            const mealDate = document.getElementById('mealDate').value;
+            const mealTime = document.getElementById('mealTime').value;
+            const mealName = document.getElementById('mealName').value;
+            const userId = localStorage.getItem("user_id");
+
+            if (!mealDate || !mealTime || !mealName) {
+                alert('Please fill in all fields.');
+                return;
+            }
+
+            const response = await fetch('http://127.0.0.1:5000/meals', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    user_id: userId, 
+                    meal_type: mealType,
+                    meal_name: mealName,
+                    meal_date: mealDate,
+                    meal_time: mealTime
+                })
+            });
+
+            if (response.ok) {
+                const nutritionLog = document.getElementById('nutritionLog');
+                const mealItem = document.createElement('div');
+                mealItem.className = 'timeline-item';
+                mealItem.innerHTML = `
+                    <div>
+                        <h3>${mealType.charAt(0).toUpperCase() + mealType.slice(1)}</h3>
+                        <p>${mealName}</p>
+                        <small>${mealDate} at ${mealTime}</small>
+                    </div>
+                `;
+                nutritionLog.appendChild(mealItem);
+
+                document.getElementById('mealDate').value = '';
+                document.getElementById('mealTime').value = '';
+                document.getElementById('mealName').value = '';
+            } else {
+                alert('Failed to add meal. Please try again.');
+            }
+        }
+
+        async function displayMeals() {
+            const nutritionLog = document.getElementById('nutritionLog');
+            nutritionLog.innerHTML = '';
+            const userId = localStorage.getItem("user_id");
+            const response = await fetch(`http://127.0.0.1:5000/getmeals?user_id=${userId}`); 
+            const meals = await response.json();
+
+            if (meals.length === 0) {
+                alert('No meals added yet.');
+            } else {
+                meals.forEach(meal => {
+                    const mealItem = document.createElement('div');
+                    mealItem.className = 'timeline-item';
+                    mealItem.innerHTML = `
+                        <div>
+                            <h3>${meal.meal_type.charAt(0).toUpperCase() + meal.meal_type.slice(1)}</h3>
+                            <p>${meal.meal_name}</p>
+                            <small>${meal.meal_date} at ${meal.meal_time}</small>
+                        </div>
+                    `;
+                    nutritionLog.appendChild(mealItem);
+                });
+            }
+        }
+
+        const navLinks = document.querySelectorAll('nav a');
+        const currentPage = decodeURIComponent(window.location.pathname.split('/').pop());
+
+        navLinks.forEach(link => {
+            const href = decodeURIComponent(link.getAttribute('href'));
+            if (href === currentPage) {
+                link.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>

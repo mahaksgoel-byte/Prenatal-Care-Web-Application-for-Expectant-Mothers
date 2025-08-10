@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BabySteps V2 - Music & Books</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+       :root {
+            --powder-blue: #B0E0E6;
+            --baby-pink: #FFB6C1;
+            --light-powder-blue: #F0F8FF;
+            --light-baby-pink: #FFF0F5;
+            --text-primary: #4A4A4A;
+            --text-secondary: #6a1b9a;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--light-powder-blue);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: auto 1fr;
+        }
+        nav {
+    width: 250px;
+    background-color: #e3e9ff;
+    color: #333;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 30px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+}
+
+nav a {
+    width: 90%;
+    text-decoration: none;
+    color: #6a1b9a;
+    font-size: 1.2em;
+    padding: 15px;
+    text-align: center;
+    border-radius: 10px;
+    margin: 10px 0;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+nav a:hover {
+    background-color: #fce4ec;
+    transform: scale(1.05);
+}
+
+nav a.active {
+    background-color: #f8bbd0;
+    font-weight: bold;
+}
+
+        .main-content {
+            margin-left: 260px;
+            padding: 2rem;
+            width: calc(100% - 260px);
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--light-baby-pink), var(--baby-pink));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+        }
+
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: var(--text-secondary);
+            margin: 0.5rem 0;
+        }
+
+        .media-form {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .media-form h2 {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.5em;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--light-baby-pink);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--baby-pink);
+            box-shadow: 0 0 0 3px rgba(255, 182, 193, 0.2);
+        }
+
+        .action-button {
+            background: linear-gradient(45deg, var(--text-secondary), #8e24aa);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .banner {
+            width: 100%;
+            background: linear-gradient(90deg, var(--baby-pink), var(--powder-blue));
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            font-size: 2rem;
+            font-weight: bold;
+            position: relative;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .action-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(106, 27, 154, 0.2);
+        }
+
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .media-item {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .media-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .media-item-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .media-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--light-baby-pink), var(--baby-pink));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+        }
+
+        .media-item h3 {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .media-item p {
+            color: var(--text-primary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .media-item a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .media-item a:hover {
+            color: #8e24aa;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                position: relative;
+                width: 100%;
+                height: auto;
+                padding: 1rem;
+            }
+
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+                padding: 1rem;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .stat-card {
+            cursor: pointer;
+            position: relative;
+        }
+
+        .stat-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            opacity: 0;
+            height: 0;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .stat-card.active .stat-controls {
+            opacity: 1;
+            height: 40px;
+        }
+
+        .control-button {
+            background: var(--light-baby-pink);
+            border: none;
+            border-radius: 8px;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-secondary);
+        }
+
+        .control-button:hover {
+            background: var(--baby-pink);
+            transform: scale(1.1);
+        }
+
+        .timer-button {
+            background: var(--text-secondary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .timer-button:hover {
+            background: #8e24aa;
+            transform: translateY(-2px);
+        }
+
+        .timer-button.active {
+            background: #ef5350;
+        }
+
+        .stat-footer {
+            margin-top: 0.5rem;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: var(--light-baby-pink);
+            border-radius: 2px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: var(--text-secondary);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="main.html">Home</a>
+        <a href="health tracker page.html">Health Trackers</a>
+        <a href="calendar.html">Appointment Calendar</a>
+        <a href="education.html">Education</a>
+        <a href="journal.html">Journal</a>
+        <a href="NutriFit.html">NutriFit</a>
+        <a href="music and books page.html"class="active">Music & Books</a>
+        <a href="faqs page.html">FAQs</a>
+        <a href="chatbot page.html">Chat with Zoee</a>
+    </nav>
+
+    <div class="main-content">
+        <div class="banner">Welcome to Your Fitness Dashboard</div>
+    <div class="main-content">
+        <div class="dashboard-grid">
+            <div class="stat-card" id="readingCard">
+                <div class="stat-header">
+                    <div class="stat-icon">
+                        <i class="fas fa-book fa-lg"></i>
+                    </div>
+                    <span>Reading Time</span>
+                </div>
+                <div class="stat-value" id="readingTime">0.0h</div>
+                <span>this week</span>
+                <div class="stat-controls">
+                    <button class="timer-button" id="readingTimer">
+                        <i class="fas fa-play"></i> Start Reading
+                    </button>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-bar-fill" id="readingProgress"></div>
+                </div>
+                <div class="stat-footer" id="readingFooter"></div>
+            </div>
+
+            <div class="stat-card" id="musicCard">
+                <div class="stat-header">
+                    <div class="stat-icon">
+                        <i class="fas fa-music fa-lg"></i>
+                    </div>
+                    <span>Music Sessions</span>
+                </div>
+                <div class="stat-value" id="musicSessions">0</div>
+                <span>this week</span>
+                <div class="stat-controls">
+                    <button class="control-button" id="decreaseMusicSessions">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button class="control-button" id="increaseMusicSessions">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+                <div class="stat-footer" id="musicFooter">Click to track sessions</div>
+            </div>
+
+            <div class="stat-card" id="podcastCard">
+                <div class="stat-header">
+                    <div class="stat-icon">
+                        <i class="fas fa-podcast fa-lg"></i>
+                    </div>
+                    <span>Podcasts</span>
+                </div>
+                <div class="stat-value" id="podcastCount">0</div>
+                <span>saved episodes</span>
+                <div class="stat-controls">
+                    <button class="control-button" id="decreasePodcasts">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button class="control-button" id="increasePodcasts">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+                <div class="stat-footer" id="podcastFooter">Click to track episodes</div>
+            </div>
+        </div>
+        <div class="media-grid">
+            <div class="media-item">
+                <div class="media-item-header">
+                    <div class="media-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>Your Books</h3>
+                </div>
+                <div id="booksList">
+                    <h3>Recommendations:</h3>
+                    <h3>Book 1:</h3>
+                    <a href="https://archive.org/details/pregnancychildbi0000simk_k7k7/mode/2up" target="_blank">
+                        <i class="fas fa-book-reader"></i>
+                        Pregnancy, Childbirth, and the Newborn: The Complete Guide
+                    </a>
+                    <p>A comprehensive guide offering information on pregnancy, childbirth, and early parenting. It is widely praised for its balanced and empowering advice.</p>
+                    
+                    <h3>Book 2:</h3>
+                    <a href="https://www.scribd.com/document/457059521/Real-Food-for-Pregnancy-Chapter1-Lily-Nichols" target="_blank">
+                        <i class="fas fa-book-reader"></i>
+                        Real Food for Pregnancy: The Science and Wisdom of Optimal Prenatal Nutrition
+                    </a>
+                    <p>A science-backed guide to prenatal nutrition, emphasizing whole, nutrient-dense foods for the health of both mother and baby.</p>
+                </div>
+            </div>
+
+            <div class="media-item">
+                <div class="media-item-header">
+                    <div class="media-icon">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <h3>Your Music</h3>
+                </div>
+                <div id="musicList">
+                    <h3>Recommendations:</h3>
+                    <h3>Playlist 1: Soothing Music</h3>
+                    <a href="https://open.spotify.com/playlist/3M84byQ2j1JCFEGCxeSC77" target="_blank">
+                        <i class="fab fa-spotify"></i>
+                        Listen on Spotify
+                    </a>
+                    
+                    <h3>Playlist 2: Piano and Nature Sounds</h3>
+                    <a href="https://open.spotify.com/playlist/6KeVxmlymvSFe2WGnj8WDo" target="_blank">
+                        <i class="fab fa-spotify"></i>
+                        Listen on Spotify
+                    </a>
+                </div>
+            </div>
+
+            <div class="media-item">
+                <div class="media-item-header">
+                    <div class="media-icon">
+                        <i class="fas fa-podcast"></i>
+                    </div>
+                    <h3>Your Podcasts</h3>
+                </div>
+                <div id="podcastList">
+                    <h3>Recommendations:</h3>
+                    <h3>Podcast 1:</h3>
+                    <h3>"Talking Womb" Podcast</h3>
+                <p><a href="https://open.spotify.com/show/7ISgEEGLA7xJm11YV7fvjd" target="_blank">Listen on Spotify</a></p>
+               <p>Tune in to this podcast and come along the 40-week long ride while we guide and prepare you for childbirth.</p>
+               <h3>Podcast 2:</h3>
+               <h3>"Is It Normal? The Pregnancy Podcast With Jessie Ware"</h3>
+               <p><a href="https://open.spotify.com/show/1BgzLvfTmLNAvAw56dPDHt" target="_blank">Listen on Spotify</a></p>
+              <p>'Is It Normal? The Pregnancy Podcast' is the new podcast from Jessie Ware in which she speaks to different experts to explore and reassure everybody about what is going on with our bodies and our babies during pregnancy and birth.</p>
+                    
+                </div>
+
+    </div>
+
+    <script>
+        let readingStartTime = null;
+        let readingInterval = null;
+        let totalReadingTime = 0;
+
+        const readingCard = document.getElementById('readingCard');
+        const readingTimer = document.getElementById('readingTimer');
+        const readingTimeDisplay = document.getElementById('readingTime');
+        const readingProgress = document.getElementById('readingProgress');
+        const readingFooter = document.getElementById('readingFooter');
+
+        readingCard.addEventListener('click', () => {
+            readingCard.classList.toggle('active');
+        });
+
+        readingTimer.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (!readingStartTime) {
+                readingStartTime = new Date();
+                readingTimer.innerHTML = '<i class="fas fa-stop"></i> Stop Reading';
+                readingTimer.classList.add('active');
+                
+                readingInterval = setInterval(() => {
+                    const now = new Date();
+                    const elapsed = (now - readingStartTime) / (1000 * 60 * 60);
+                    const total = totalReadingTime + elapsed;
+                    readingTimeDisplay.textContent = total.toFixed(1) + 'h';
+                    readingProgress.style.width =` ${(total % 1) * 100}%`;
+                    readingFooter.textContent = 'Reading in progress...';
+                }, 1000);
+            } else {
+                clearInterval(readingInterval);
+                const elapsed = (new Date() - readingStartTime) / (1000 * 60 * 60);
+                totalReadingTime += elapsed;
+                readingStartTime = null;
+                readingTimer.innerHTML = '<i class="fas fa-play"></i> Start Reading';
+                readingTimer.classList.remove('active');
+                readingFooter.textContent = 'Last session: ' + elapsed.toFixed(2) + 'h';
+            }
+        });
+
+        let musicCount = 0;
+        const musicCard = document.getElementById('musicCard');
+        const musicDisplay = document.getElementById('musicSessions');
+        const musicFooter = document.getElementById('musicFooter');
+
+        musicCard.addEventListener('click', () => {
+            musicCard.classList.toggle('active');
+        });
+
+        document.getElementById('increaseMusicSessions').addEventListener('click', (e) => {
+            e.stopPropagation();
+            musicCount++;
+            musicDisplay.textContent = musicCount;
+            musicFooter.textContent =` Last updated: ${new Date().toLocaleTimeString()}`;
+        });
+
+        document.getElementById('decreaseMusicSessions').addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (musicCount > 0) {
+                musicCount--;
+                musicDisplay.textContent = musicCount;
+                musicFooter.textContent = `Last updated: ${new Date().toLocaleTimeString()}`;
+            }
+        });
+
+        let podcastCount = 0;
+        const podcastCard = document.getElementById('podcastCard');
+        const podcastDisplay = document.getElementById('podcastCount');
+        const podcastFooter = document.getElementById('podcastFooter');
+
+        podcastCard.addEventListener('click', () => {
+            podcastCard.classList.toggle('active');
+        });
+
+        document.getElementById('increasePodcasts').addEventListener('click', (e) => {
+            e.stopPropagation();
+            podcastCount++;
+            podcastDisplay.textContent = podcastCount;
+            podcastFooter.textContent = `Last updated: ${new Date().toLocaleTimeString()}`;
+        });
+
+        document.getElementById('decreasePodcasts').addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (podcastCount > 0) {
+                podcastCount--;
+                podcastDisplay.textContent = podcastCount;
+                podcastFooter.textContent =` Last updated: ${new Date().toLocaleTimeString()}`;
+            }
+        });
+    </script>
+</body>
+</html>

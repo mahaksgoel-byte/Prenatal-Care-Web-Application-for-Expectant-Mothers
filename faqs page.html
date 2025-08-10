@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BabySteps V2 - FAQs</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --powder-blue: #B0E0E6;
+            --baby-pink: #FFB6C1;
+            --light-powder-blue: #F0F8FF;
+            --light-baby-pink: #FFF0F5;
+            --text-primary: #4A4A4A;
+            --text-secondary: #6a1b9a;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--light-powder-blue);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+        }
+        .banner {
+            width: 100%;
+            background: linear-gradient(90deg, var(--baby-pink), var(--powder-blue));
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            font-size: 2rem;
+            font-weight: bold;
+            position: relative;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+
+        nav {
+            width: 250px;
+            background-color: #e3e9ff;
+            color: #333;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 30px;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+        }
+
+        nav a {
+            width: 90%;
+            text-decoration: none;
+            color: #6a1b9a;
+            font-size: 1.2em;
+            padding: 15px;
+            text-align: center;
+            border-radius: 10px;
+            margin: 10px 0;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #fce4ec;
+            transform: scale(1.05);
+        }
+
+        nav a.active {
+            background-color: #f8bbd0;
+            font-weight: bold;
+        }
+
+        .main-content {
+            margin-left: 260px;
+            padding: 2rem;
+            width: calc(100% - 260px);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .faq-question {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .faq-answer {
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding-left: 2.5rem;
+        }
+
+        .search-container {
+            margin-bottom: 2rem;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--powder-blue);
+            border-radius: 10px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: var(--baby-pink);
+        }
+
+        .category-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .category-button {
+            background: var(--light-powder-blue);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 20px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .category-button:hover,
+        .category-button.active {
+            background: var(--baby-pink);
+            color: white;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="main.html">Home</a>
+        <a href="health tracker page.html">Health Trackers</a>
+        <a href="calendar.html">Appointment Calendar</a>
+        <a href="education.html">Education</a>
+        <a href="journal.html">Journal</a>
+        <a href="NutriFit.html" >NutriFit</a>
+        <a href="music and books page.html">Music & Books</a>
+        <a href="faqs page.html"class="active">FAQs</a>
+        <a href="chatbot page.html">Chat with Zoee</a>
+    </nav>
+
+    <div class="main-content">
+        <div class="banner">Welcome to Your FAQ Section </div>
+    
+        <div class="search-container">
+            <input type="text" id="search-box" class="search-box" placeholder="Search frequently asked questions...">
+        </div>
+
+        <div class="category-buttons">
+            <button class="category-button active" data-category="all">All</button>
+            <button class="category-button" data-category="health">Health</button>
+            <button class="category-button" data-category="nutrition">Nutrition</button>
+            <button class="category-button" data-category="exercise">Exercise</button>
+            <button class="category-button" data-category="general">General</button>
+        </div>
+
+        <div class="faq-container" id="faq-container">
+           
+        </div>
+    </div>
+
+    <script>
+        
+        const faqs = {
+            health: [
+                {
+                    question: "How often should I track my weight during pregnancy?",
+                    answer: "It's recommended to track your weight at each prenatal appointment, typically every 4 weeks until 28 weeks, then every 2 weeks until 36 weeks, and weekly thereafter. Avoid daily weighing as normal weight fluctuations may cause unnecessary concern."
+                },
+                {
+                    question: "How can I track my baby's movements?",
+                    answer: "Start counting kicks around week 28. Choose a time when your baby is usually active and count movements. You should feel at least 10 movements within 2 hours. Use our app's kick counter feature for easy tracking."
+                },
+                {
+                    question: "How often should I log my symptoms?",
+                    answer: "It's recommended to log significant symptoms daily, especially new ones or changes in existing symptoms. This helps identify patterns and provides valuable information for your healthcare provider."
+                },
+                {
+                    question: "How accurate are the pregnancy week calculations?",
+                    answer: "Our pregnancy week calculations are based on your last menstrual period or ultrasound dating. While generally accurate, always defer to your healthcare provider's official dating of your pregnancy."
+                },
+                {
+                    question: "What is considered normal blood pressure during pregnancy?",
+                    answer: "Normal blood pressure during pregnancy is typically around 120/80 mmHg. A reading above 140/90 mmHg may indicate pregnancy-induced hypertension and should be reported to your healthcare provider immediately."
+                },
+                {
+                    question: "How often should I check my blood sugar if I have gestational diabetes?",
+                    answer: "With gestational diabetes, you should typically check your blood sugar first thing in the morning (fasting) and 1-2 hours after the start of each meal. Your healthcare provider may recommend a different schedule based on your specific situation."
+                },
+                {
+                    question: "What pregnancy symptoms warrant immediate medical attention?",
+                    answer: "Seek immediate medical care for: severe abdominal pain, heavy vaginal bleeding, severe headaches with vision changes, decreased fetal movement, sudden swelling of face/hands, fever over 100.4°F, and contractions before 37 weeks."
+                },
+                {
+                    question: "When should I start monitoring contractions?",
+                    answer: "Start monitoring contractions when they become regular and increasingly painful. Use the app's contraction timer in the third trimester to track frequency (how often they occur), duration (how long each lasts), and intensity."
+                }
+            ],
+            nutrition: [
+                {
+                    question: "How much water should I drink daily?",
+                    answer: "During pregnancy, you should aim to drink 8-12 cups (64-96 ounces) of water daily. This helps maintain amniotic fluid levels, supports blood volume expansion, and prevents dehydration and constipation."
+                },
+                {
+                    question: "What nutrients are most important during pregnancy?",
+                    answer: "Key nutrients include folic acid, iron, calcium, vitamin D, DHA, and protein. A balanced diet supplemented with prenatal vitamins will help ensure you're getting adequate amounts of these essential nutrients."
+                },
+                {
+                    question: "Which foods should I avoid during pregnancy?",
+                    answer: "Avoid raw or undercooked meat, fish with high mercury levels, unpasteurized dairy, raw eggs, certain soft cheeses, unwashed produce, and excessive caffeine. These foods pose risks of bacterial contamination or other harmful effects."
+                },
+                {
+                    question: "How much extra calories do I need during pregnancy?",
+                    answer: "During the first trimester, you generally don't need extra calories. In the second trimester, add about 340 extra calories daily, and in the third trimester, about 450 extra calories daily. Focus on nutrient-dense foods rather than empty calories."
+                },
+                {
+                    question: "Are cravings normal during pregnancy?",
+                    answer: "Yes, food cravings are normal during pregnancy due to hormonal changes, nutritional needs, and enhanced sense of smell. As long as you're maintaining a balanced diet overall, it's okay to indulge occasionally in safe cravings."
+                },
+                {
+                    question: "How can I manage morning sickness through diet?",
+                    answer: "Eat small, frequent meals to keep your stomach from being empty, choose bland, easy-to-digest foods, stay hydrated, try ginger tea or candies, avoid triggering smells/foods, and eat protein-rich snacks before bed and first thing in the morning."
+                },
+                {
+                    question: "Is it safe to consume artificial sweeteners while pregnant?",
+                    answer: "FDA-approved sweeteners like aspartame, sucralose, and stevia are generally considered safe in moderation during pregnancy. However, it's best to limit processed foods containing artificial ingredients and focus on natural, whole foods."
+                }
+            ],
+            exercise: [
+                {
+                    question: "What exercises are safe during pregnancy?",
+                    answer: "Low-impact activities like walking, swimming, prenatal yoga, and stationary cycling are generally safe during pregnancy. Always consult your healthcare provider before starting any exercise routine, and listen to your body's signals."
+                },
+                {
+                    question: "How often should I exercise during pregnancy?",
+                    answer: "Aim for at least 150 minutes of moderate-intensity exercise per week, spread across at least 3 days. This could be 30 minutes, 5 days a week, or shorter 10-minute sessions throughout the day if that's more manageable."
+                },
+                {
+                    question: "Are there exercises I should avoid while pregnant?",
+                    answer: "Avoid exercises with high fall risk, contact sports, activities requiring lying flat on your back after the first trimester, hot yoga/Pilates, scuba diving, high-altitude exercise, and anything causing pain, dizziness, or shortness of breath."
+                },
+                {
+                    question: "How can I strengthen my pelvic floor muscles?",
+                    answer: "Kegel exercises help strengthen pelvic floor muscles. Contract the muscles you use to stop urination for 5-10 seconds, then release. Repeat 10-15 times, 3 times daily. Our app's exercise section includes guided pelvic floor workouts."
+                },
+                {
+                    question: "When should I stop exercising during pregnancy?",
+                    answer: "Stop exercising and contact your healthcare provider if you experience: vaginal bleeding, leaking amniotic fluid, difficulty breathing, dizziness, chest pain, headache, muscle weakness, calf pain/swelling, preterm labor, or decreased fetal movement."
+                },
+                {
+                    question: "Can I continue strength training during pregnancy?",
+                    answer: "Yes, with modifications. Use lighter weights and higher repetitions, avoid lifting heavy weights, maintain proper form, avoid breath-holding, and focus on functional movements that support daily activities and labor preparation."
+                },
+                {
+                    question: "What's the best exercise to prepare for labor?",
+                    answer: "Walking, squats, pelvic tilts, prenatal yoga, swimming, and specialized birth preparation exercises are excellent for labor preparation. Our app offers a 'Labor Prep' workout series in the third trimester exercise section."
+                }
+            ],
+            general: [
+                {
+                    question: "What should I pack in my hospital bag?",
+                    answer: "Pack comfortable clothing, toiletries, important documents, baby clothes, diapers, and comfort items. Use our hospital bag checklist feature to ensure you don't forget anything essential."
+                },
+                {
+                    question: "Can I export my health data from the app?",
+                    answer: "Yes, you can export your health data in PDF or CSV format from the Settings menu. This feature is useful for sharing information with your healthcare providers or keeping personal records."
+                },
+                {
+                    question: "When should I start playing music for my baby?",
+                    answer: "You can start playing music for your baby around 16-20 weeks of pregnancy when their ears begin to develop. Keep the volume moderate (around 50-60 decibels), and choose calming music that you enjoy."
+                },
+                {
+                    question: "How do I set up appointment reminders in the app?",
+                    answer: "Go to the Calendar section, add your appointment details, and toggle on the 'Reminder' option. You can set multiple reminders (e.g., 1 day before, 2 hours before) and customize notification sounds for different appointment types."
+                },
+                {
+                    question: "Can my partner access my BabySteps account?",
+                    answer: "Yes, you can invite your partner through the Settings > Family Sharing option. They'll create their own login but can view and contribute to your pregnancy journey, including adding notes to appointments and tracking shared tasks."
+                },
+                {
+                    question: "How can I customize my pregnancy timeline?",
+                    answer: "Go to Settings > My Pregnancy and you can customize which milestones and development facts appear on your timeline. You can also add personal milestones like gender reveal parties or baby showers to track alongside developmental stages."
+                },
+                {
+                    question: "Is my data secure in the BabySteps app?",
+                    answer: "Yes, we use industry-standard encryption to protect your personal and health information. Your data is stored securely and is never sold to third parties. You can review our complete privacy policy in the app under Settings > Privacy."
+                },
+                {
+                    question: "How do I connect my smart devices to the app?",
+                    answer: "Go to Settings > Connected Devices and select from compatible devices including smart scales, blood pressure monitors, and activity trackers. Follow the on-screen instructions to complete the pairing process with your device."
+                },
+                {
+                    question: "Can I use BabySteps after my baby is born?",
+                    answer: "Absolutely! BabySteps transitions to postpartum and newborn tracking after your due date. You'll get features for tracking feeding sessions, diaper changes, sleep patterns, growth measurements, and developmental milestones."
+                },
+                {
+                    question: "How do I record my birth story in the app?",
+                    answer: "Go to the Journal section and select the 'Birth Story' template. You can write text, add photos, record voice notes, and even track the timeline of your labor. This special entry can be exported as a keepsake PDF."
+                }
+            ]
+        };
+
+       
+        faqs.all = [
+            ...faqs.health,
+            ...faqs.nutrition,
+            ...faqs.exercise,
+            ...faqs.general
+        ];
+
+        
+        function displayFAQs(category) {
+            const container = document.getElementById('faq-container');
+            container.innerHTML = '';
+            
+            const faqsToShow = faqs[category];
+            
+            faqsToShow.forEach(faq => {
+                const faqItem = document.createElement('div');
+                faqItem.className = 'faq-item fade-in';
+                
+                faqItem.innerHTML = `
+                    <div class="faq-question">
+                        <i class="fas fa-question-circle"></i>
+                        ${faq.question}
+                    </div>
+                    <div class="faq-answer">
+                        ${faq.answer}
+                    </div>
+                `;
+                
+                container.appendChild(faqItem);
+            });
+        }
+
+        
+        function searchFAQs() {
+            const searchText = document.getElementById('search-box').value.toLowerCase();
+            const activeCategory = document.querySelector('.category-button.active').dataset.category;
+            const container = document.getElementById('faq-container');
+            container.innerHTML = '';
+            
+            const faqsToSearch = activeCategory === 'all' ? faqs.all : faqs[activeCategory];
+            
+            const filteredFAQs = faqsToSearch.filter(faq => 
+                faq.question.toLowerCase().includes(searchText) || 
+                faq.answer.toLowerCase().includes(searchText)
+            );
+            
+            filteredFAQs.forEach(faq => {
+                const faqItem = document.createElement('div');
+                faqItem.className = 'faq-item fade-in';
+                
+                faqItem.innerHTML = `
+                    <div class="faq-question">
+                        <i class="fas fa-question-circle"></i>
+                        ${faq.question}
+                    </div>
+                    <div class="faq-answer">
+                        ${faq.answer}
+                    </div>
+                `;
+                
+                container.appendChild(faqItem);
+            });
+        }
+
+        
+        document.addEventListener('DOMContentLoaded', () => {
+           
+            displayFAQs('all');
+            
+           
+            const categoryButtons = document.querySelectorAll('.category-button');
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    
+                    button.classList.add('active');
+                    
+                    
+                    displayFAQs(button.dataset.category);
+                });
+            });
+            
+            
+            document.getElementById('search-box').addEventListener('input', searchFAQs);
+        });
+
+        
+        const navLinks = document.querySelectorAll('nav a');
+        const currentPage = decodeURIComponent(window.location.pathname.split('/').pop());
+    
+        navLinks.forEach(link => {
+            const href = decodeURIComponent(link.getAttribute('href'));
+            if (href === currentPage) {
+                link.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>

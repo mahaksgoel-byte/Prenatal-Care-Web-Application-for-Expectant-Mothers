@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BabySteps V2 - Education</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --powder-blue: #B0E0E6;
+            --baby-pink: #FFB6C1;
+            --light-powder-blue: #F0F8FF;
+            --light-baby-pink: #FFF0F5;
+            --text-primary: #4A4A4A;
+            --text-secondary: #6a1b9a;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--light-powder-blue);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: auto 1fr;
+        }
+
+        nav {
+            width: 250px;
+            background-color: #e3e9ff;
+            color: #333;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 30px;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+        }
+
+        nav a {
+            width: 90%;
+            text-decoration: none;
+            color: #6a1b9a;
+            font-size: 1.2em;
+            padding: 15px;
+            text-align: center;
+            border-radius: 10px;
+            margin: 10px 0;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #fce4ec;
+            transform: scale(1.05);
+        }
+
+        nav a.active {
+            background-color: #f8bbd0;
+            font-weight: bold;
+        }
+
+        .main-content {
+            margin-left: 260px;
+            padding: 2rem;
+            width: calc(100% - 260px);
+        }
+
+        .education-header {
+            background: linear-gradient(90deg, var(--powder-blue), var(--baby-pink));
+            border-radius: 20px;
+            padding: 2rem;
+            color: white;
+            text-align: center;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .education-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .education-header p {
+            font-size: 1.2rem;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .section p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .section ul {
+            margin-left: 20px;
+        }
+
+        .section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .tips {
+            background: var(--light-baby-pink);
+            border-left: 5px solid var(--baby-pink);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+                padding: 1rem;
+            }
+
+            nav {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="main.html">Home</a>
+        <a href="health tracker page.html">Health Trackers</a>
+        <a href="calendar.html">Appointment Calendar</a>
+        <a href="education.html" class="active">Education</a>
+        <a href="journal.html">Journal</a>
+        <a href="NutriFit.html">NutriFit</a>
+        <a href="music and books page.html">Music & Books</a>
+        <a href="faqs page.html">FAQs</a>
+        <a href="chatbot page.html">Chat with Zoee</a>
+    </nav>
+
+    <div class="main-content">
+        <div class="education-header">
+            <h1>Welcome to the Education Section</h1>
+            <p>Discover essential information for a safe, healthy, and joyful pregnancy journey. Explore tips, precautions, and expert advice tailored for you.</p>
+        </div>
+
+        <div class="section">
+            <h2>Important Tips for Expectant Mothers</h2>
+            <ul>
+                <li>Stay hydrated by drinking plenty of water throughout the day.</li>
+                <li>Maintain a balanced diet rich in fruits, vegetables, whole grains, and lean protein.</li>
+                <li>Take prenatal vitamins as prescribed by your doctor.</li>
+                <li>Engage in regular light exercises like walking or prenatal yoga to improve circulation and reduce stress.</li>
+                <li>Ensure you get at least 8 hours of sleep every night.</li>
+            </ul>
+            <div class="tips">
+                <strong>Quick Tip:</strong> Use a pregnancy pillow for better sleep and support during the later stages of pregnancy.
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Do's and Don'ts During Pregnancy</h2>
+            <h3>Do's:</h3>
+            <ul>
+                <li>Attend all prenatal checkups and follow your doctor's advice.</li>
+                <li>Wear comfortable and supportive shoes to avoid swelling and discomfort.</li>
+                <li>Practice good posture to reduce back pain.</li>
+                <li>Keep your mental health in check by engaging in relaxation techniques such as meditation.</li>
+            </ul>
+            <h3>Don'ts:</h3>
+            <ul>
+                <li>Avoid alcohol, tobacco, and recreational drugs.</li>
+                <li>Limit caffeine intake to 200 mg per day.</li>
+                <li>Do not lift heavy objects to prevent strain on your back and abdomen.</li>
+                <li>Avoid raw or undercooked seafood, eggs, and meat.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Precautions to Take During Pregnancy</h2>
+            <p>Taking the right precautions can make your pregnancy safer and more comfortable:</p>
+            <ul>
+                <li>Get vaccinated for flu and other necessary immunizations after consulting your doctor.</li>
+                <li>Wash your hands frequently to prevent infections.</li>
+                <li>Avoid exposure to harmful chemicals, including household cleaners and pesticides.</li>
+                <li>Wear a seatbelt correctly with the lap belt under your belly.</li>
+                <li>Monitor your baby's movements during the third trimester and report any changes to your doctor.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Additional Resources</h2>
+            <p>Explore these trusted resources for more information:</p>
+            <ul>
+                <li><a href="https://www.who.int" target="_blank">World Health Organization (WHO)</a></li>
+                <li><a href="https://www.cdc.gov" target="_blank">Centers for Disease Control and Prevention (CDC)</a></li>
+                <li><a href="https://www.marchofdimes.org" target="_blank">March of Dimes</a></li>
+                <li><a href="https://www.babycenter.com" target="_blank">BabyCenter</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const navLinks = document.querySelectorAll('nav a');
+        const currentPage = decodeURIComponent(window.location.pathname.split('/').pop());
+
+        navLinks.forEach(link => {
+            const href = decodeURIComponent(link.getAttribute('href'));
+            if (href === currentPage) {
+                link.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>

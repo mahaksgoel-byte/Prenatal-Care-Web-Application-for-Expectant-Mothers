@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BabySteps - Sign Up</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #E3FDFD, #FFE6FA);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            background: #FFFFFF;
+            border-radius: 15px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 900px;
+            padding: 25px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #3B4252;
+            margin-bottom: 10px;
+            font-size: 50px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .signup-text {
+            font-size: 24px;
+            font-weight: 600;
+            color: #5E81AC;
+            margin-bottom: 20px;
+        }
+
+        .form-section {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .form-container {
+            flex: 1;
+            border: 1px solid #D8DEE9;
+            border-radius: 10px;
+            padding: 30px;
+            background-color: #F0F4F8;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h2 {
+            color: #3B4252;
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            width: 80%;
+            text-align: left;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #4C566A;
+            font-weight: 500;
+        }
+
+        input,
+        select {
+            width: 80%;
+            padding: 12px;
+            margin-top: 5px;
+            border: 1px solid #D8DEE9;
+            border-radius: 8px;
+            font-size: 14px;
+            background-color: #ECEFF4;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .password-hint {
+            width: 80%;
+            font-size: 12px;
+            color: #777;
+            text-align: left;
+            margin-top: 5px;
+        }
+
+        button {
+            background-color: #FFB6C1;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 20px;
+            width: 180px;
+        }
+
+        button:hover {
+            background-color: #FF7F9A;
+        }
+
+        .login-text {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #3B4252;
+        }
+
+        .login-text a {
+            color: #5E81AC;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .login-text a:hover {
+            text-decoration: underline;
+        }
+
+        
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgb (0, 0, 0); 
+            background-color: rgba(0, 0, 0, 0.4); 
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; 
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; 
+            text-align: center;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .back-button {
+            margin-top: 20px;
+            background-color: #FFB6C1;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            width: 180px;
+        }
+
+        .back-button:hover {
+            background-color: #FF7F9A;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>BabySteps</h1>
+        <div class="signup-text">Sign Up</div>
+
+        <form id="signup-form">
+            <div class="form-section">
+                <div class="form-container">
+                    <h2>Login Information</h2>
+                    <label for="fullname">Full Name:</label>
+                    <input type="text" id="fullname" name="fullname" required>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+
+                    <div class="password-hint">
+                 You may enter any password you desire, as this field does not enforce any particular complexity rules.
+                      </div>
+
+                    <label for="confirm-password">Confirm Password:</label>
+                    <input type="password" id="confirm-password" name="confirm-password" required>
+                </div>
+
+                <div class="form-container">
+                    <h2>Personal Information</h2>
+                    <label for="birthdate">Birth Date:</label>
+                    <input type="date" id="birthdate" name="birthdate" required>
+
+                    <label for="bloodgroup">Blood Group:</label>
+                    <select id="bloodgroup" name="bloodgroup" required>
+                        <option value="">Select Blood Group</option>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                    </select>
+
+                    <label for="address">Address:</label>
+                    <input type="text" id="address" name="address" required>
+
+                    <label for="pincode">Pincode:</label>
+                    <input type="text" id="pincode" name="pincode" required>
+
+                    <label for="contact">Contact Number:</label>
+                    <input type="tel" id="contact" name="contact" required>
+                </div>
+            </div>
+
+            <button type="submit">Sign Up</button>
+        </form>
+
+        <div class="login-text">
+            Already have an account? <a href="login.html">Login here</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("signup-form").addEventListener("submit", async function(event) {
+            event.preventDefault();
+
+            const formData = {
+                username: document.getElementById("fullname").value,
+                email: document.getElementById("email").value,
+                password: document.getElementById("password").value,
+                blood_group: document.getElementById("bloodgroup").value,
+                address: document.getElementById("address").value,
+                pincode: document.getElementById("pincode").value,
+                contact_number: document.getElementById("contact").value
+            };
+
+            const response = await fetch("http://127.0.0.1:5000/signup", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData )
+            });
+
+            if (response.ok) {
+               
+                window.location.href = "login.html";
+            } else {
+                const result = await response.json();
+                alert(result.message);
+            }
+        });
+    </script>
+</body>
+
+</html>

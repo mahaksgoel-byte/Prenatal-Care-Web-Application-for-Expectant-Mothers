@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BabySteps V2 - Journal</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --powder-blue: #B0E0E6;
+            --baby-pink: #FFB6C1;
+            --light-powder-blue: #F0F8FF;
+            --light-baby-pink: #FFF0F5;
+            --text-primary: #4A4A4A;
+            --text-secondary: #6a1b9a;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--light-powder-blue);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: auto 1fr;
+        }
+
+        nav {
+            width: 250px;
+            background-color: #e3e9ff;
+            color: #333;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 30px;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+        }
+
+        nav a {
+            width: 90%;
+            text-decoration: none;
+            color: #6a1b9a;
+            font-size: 1.2em;
+            padding: 15px;
+            text-align: center;
+            border-radius: 10px;
+            margin: 10px 0;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #fce4ec;
+            transform: scale(1.05);
+        }
+
+        nav a.active {
+            background-color: #f8bbd0;
+            font-weight: bold;
+        }
+
+        .container {
+            margin-left: 250px;
+            width: calc(100% - 250px);
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 20px;
+            padding: 2rem;
+        }
+
+        .main-content {
+            width: 100%;
+        }
+
+        .side-display {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            height: calc(100vh - 4rem);
+            position: sticky;
+            top: 2rem;
+            overflow-y: auto;
+        }
+
+        .side-display h2 {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            text-align: center;
+            border-bottom: 2px solid var(--baby-pink);
+            padding-bottom: 0.5rem;
+        }
+
+        .side-entry {
+            background: var(--light-baby-pink);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            transition: transform 0.3s;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .side-entry:hover {
+            transform: scale(1.02);
+        }
+
+        .side-entry h3 {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .side-entry .mood {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 0.5rem;
+        }
+
+        .side-entry .date {
+            font-size: 0.8rem;
+            color: #777;
+            margin-bottom: 0.5rem }
+
+        
+
+
+     
+
+        .journal-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .journal-header p {
+            font-size: 1.2rem;
+        }
+
+        .quote-section {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            text-align: center;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .quote-section p {
+            font-style: italic;
+            font-size: 1.2rem;
+            color: #6a1b9a;
+        }
+
+        .journal-form {
+            background: var(--light-baby-pink);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            animation: fadeIn 2s ease-out;
+        }
+
+        .journal-form label {
+            display: block;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .journal-form input, .journal-form textarea, .journal-form select, .journal-form button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+
+        .journal-form textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .journal-form button {
+            background: var(--baby-pink);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .journal-form button:hover {
+            background: var(--text-secondary);
+        }
+
+        .tips-section {
+            background: #fff;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            animation: fadeIn 2.5s ease-out;
+        }
+
+        .tips-section h2 {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .tips-section ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            color: #4A4A4A;
+        }
+
+        .no-entries {
+            text-align: center;
+            color: #777;
+            font-style: italic;
+            padding: 2rem 0;
+        }
+
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 10px;
+            margin-top: 1rem;
+            text-align: center;
+            display: none;
+        }
+
+        @media (max-width: 1200px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .side-display {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin-left: 0;
+                width: 100%;
+                padding: 1rem;
+            }
+
+            nav {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="main.html">Home</a>
+        <a href="health tracker page.html"> Health Trackers</a>
+        <a href="calendar.html">Appointment Calendar</a>
+        <a href="education.html">Education</a>
+        <a href="journal.html" class="active">Journal</a>
+        <a href="NutriFit.html">NutriFit</a>
+        <a href="music and books page.html">Music & Books</a>
+        <a href="faqs page.html">FAQs</a>
+        <a href="chatbot page.html">Chat with Zoee</a>
+    </nav>
+
+    <div class="container">
+        <div class="main-content">
+            <div class="journal-header">
+                <h1>Welcome to Your Pregnancy Journal</h1>
+                <p>Document your journey, share your thoughts, and keep track of your daily routine.</p>
+            </div>
+
+            <div class="quote-section">
+                <p>"Motherhood: All love begins and ends there." – Robert Browning</p>
+            </div>
+
+            <div class="journal-form">
+                <h2>New Journal Entry</h2>
+                <form id="journal-entry-form">
+                    <label for="entry-title">Title</label>
+                    <input type="text" id="entry-title" name="entry-title" placeholder="Enter a title for your entry" required>
+
+                    <label for="entry-mood">Your Mood</label>
+                    <select id="entry-mood" name="entry-mood" required>
+                        <option value="happy">Happy</option>
+                        <option value="excited">Excited</option>
+                        <option value="anxious">Anxious</option>
+                        <option value="tired">Tired</option>
+                    </select>
+
+                    <label for="entry-content">Your Thoughts</label>
+                    <textarea id="entry-content" name="entry-content" placeholder="Write about your day, plans, or experiences..." required></textarea>
+
+                    <button type="submit">Save Entry</button>
+                </form>
+                <div id="success-message" class="success-message">Journal entry saved successfully!</div>
+            </div>
+
+            <div class="tips-section">
+                <h2>Featured Tips</h2>
+                <ul>
+                    <li>Stay hydrated and drink plenty of water.</li>
+                    <li>Take small naps to rejuvenate yourself.</li>
+                    <li>Engage in light exercises or prenatal yoga.</li>
+                    <li>Stay positive and cherish every moment.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="side-display">
+            <h2>Your Journal Entries</h2>
+            <div id="side-entries-container">
+                <div id="no-entries-message" class="no-entries">Start your journaling journey by creating your first entry!</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const userId = localStorage.getItem('user_id') || '1';
+
+        async function fetchJournalEntries() {
+            try {
+                const response = await fetch(`http://127.0.0.1:5000/journals?user_id=${userId}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Error fetching journal entries:', error);
+                return [];
+            }
+        }
+
+        async function saveJournalEntry(entry) {
+            try {
+                const response = await fetch('http://127.0.0.1:5000/journals', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        user_id: userId,
+                        title: entry.title,
+                        mood: entry.mood,
+                        thoughts: entry.thoughts,
+                        date: entry.date
+                    })
+                });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return await response.json();
+            } catch (error) {
+                console.error('Error saving journal entry:', error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            const entries = await fetchJournalEntries();
+            loadJournalEntries(entries);
+        });
+
+        document.getElementById('journal-entry-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const title = document.getElementById('entry-title').value;
+            const mood = document.getElementById('entry-mood').value;
+            const thoughts = document.getElementById('entry-content').value;
+
+            const newEntry = {
+                id: Date.now(),
+                title: title,
+                mood: mood,
+                thoughts: thoughts,
+                date: new Date().toLocaleDateString('en-US', {
+                    year : 'numeric',
+                    month: 'short',
+                    day: 'numeric'
+                })
+            };
+
+            await saveJournalEntry(newEntry);
+            addEntryToSideDisplay(newEntry);
+
+            const successMessage = document.getElementById('success-message');
+            successMessage.style.display = 'block';
+            setTimeout(function() {
+                successMessage.style.display = 'none';
+            }, 3000);
+
+            document.getElementById('journal-entry-form').reset();
+        });
+
+        function loadJournalEntries(entries) {
+            const sideEntriesContainer = document.getElementById('side-entries-container');
+            sideEntriesContainer.innerHTML = '';
+
+            if (entries.length === 0) {
+                sideEntriesContainer.innerHTML = '<div class="no-entries">Start your journaling journey by creating your first entry!</div>';
+                return;
+            }
+
+            entries.forEach(entry => {
+                addEntryToSideDisplay(entry);
+            });
+        }
+
+        function addEntryToSideDisplay(entry) {
+            const sideEntriesContainer = document.getElementById('side-entries-container');
+            const noEntriesMessage = document.getElementById('no-entries-message');
+            if (noEntriesMessage) {
+                noEntriesMessage.remove();
+            }
+
+            const entryDiv = document.createElement('div');
+            entryDiv.classList.add('side-entry');
+            entryDiv.dataset.id = entry.id;
+
+            entryDiv.innerHTML = `
+                <h3>${entry.title}</h3>
+                <div class="mood">Mood: ${entry.mood}</div>
+                <div class="date">${entry.date}</div>
+                <p>${entry.thoughts}</p>
+                <span class="expand-btn">Read more</span>
+            `;
+
+            sideEntriesContainer.insertBefore(entryDiv, sideEntriesContainer.firstChild);
+
+            const expandBtn = entryDiv.querySelector('.expand-btn');
+            expandBtn.addEventListener('click', function() {
+                entryDiv.classList.toggle('expanded');
+                this.textContent = entryDiv.classList.contains('expanded') ? 'Show less' : 'Read more';
+            });
+        }
+    </script>
+</body>
+</html>

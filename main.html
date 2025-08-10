@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BabySteps - Home</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --powder-blue: #B0E0E6;
+            --baby-pink: #FFB6C1;
+            --light-powder-blue: #F0F8FF;
+            --light-baby-pink: #FFF0F5;
+            --text-primary: #4A4A4A;
+            --text-secondary: #6a1b9a;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%; 
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--light-powder-blue);
+            color: var(--text-primary);
+            display: grid;
+            grid-template-columns: auto 1fr;
+            min-height: 100vh; 
+        }
+
+        nav {
+            width: 250px;
+            background-color: #e3e9ff;
+            color: #333;
+            height: 100vh; 
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 30px;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+        }
+
+        nav a {
+            width: 90%;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 1.2em;
+            padding: 15px;
+            text-align: center;
+            border-radius: 10px;
+            margin: 10px 0;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #fce4ec;
+            transform: scale(1.05);
+        }
+
+        nav a.active {
+            background-color: #f8bbd0;
+            font-weight: bold;
+        }
+
+        .main-content {
+            margin-left: 260px;
+            padding: 2rem;
+            width: calc(100% - 260px);
+            min-height: 100vh; 
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero {
+            background: linear-gradient(90deg, var(--powder-blue), var(--baby-pink));
+            border-radius: 20px;
+            padding: 3rem;
+            color: white;
+            text-align: center;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            flex: 1; 
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .hero .action-button {
+            background: var(--light-baby-pink);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .hero .action-button:hover {
+            background: var(--baby-pink);
+            color: white;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card i {
+            font-size: 2rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: #6A6A6A;
+        }
+
+        @media (max-width: 1200px) {
+            .features {
+                grid-template-columns: repeat(2, 1fr); 
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+                padding: 1rem;
+            }
+
+            nav {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 1rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="main.html"class="active">Home</a>
+        <a href="health tracker page.html">Health Trackers</a>
+        <a href="calendar.html">Appointment Calendar</a>
+        <a href="education.html">Education</a>
+        <a href="journal.html">Journal</a>
+        <a href="NutriFit.html">NutriFit</a>
+        <a href="music and books page.html">Music & Books</a>
+        <a href="faqs page.html">FAQs</a>
+        <a href="chatbot page.html">Chat with Zoee</a>
+    </nav>
+
+    <div class="main-content">
+        <div class="hero">
+            <h1>Welcome to BabySteps</h1>
+            <p>Your all-in-one prenatal health tracking and guidance platform.</p>
+            <div class="action-buttons">
+                <a href="chatbot page.html">
+                    <button class="action-button">Learn More</button>
+                </a>
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <i class="fas fa-heartbeat"></i>
+                <h3>Health Trackers</h3>
+                <p>Monitor your prenatal health metrics with ease.</p>
+            </div>
+
+            <div class="feature-card">
+                <i class="fas fa-calendar-check"></i>
+                <h3>Appointment Calendar</h3>
+                <p>Keep track of all your important prenatal checkups.</p>
+            </div>
+
+            <div class="feature-card">
+                <i class="fas fa-book"></i>
+                <h3>Education</h3>
+                <p>Learn about prenatal care and parenting tips.</p>
+            </div>
+
+            <div class="feature-card">
+                <i class="fas fa-book-open"></i>
+                <h3>Journal</h3>
+                <p>Document your pregnancy journey and thoughts.</p>
+            </div>
+
+            <div class="feature-card">
+                <i class="fas fa-utensils"></i>
+                <h3>NutriFit</h3>
+                <p>Get personalized meal suggestions from experts.</p>
+            </div>
+
+            <div class="feature-card">
+                <i class="fas fa-music"></i>
+                <h3>Music & Books</h3>
+                <p>Enjoy curated music and books for relaxation.</p>
+            </div>
+
+            <div class="feature-card">
+                <i class="fas fa-question-circle"></i>
+                <h3>FAQs</h3>
+                <p>Find answers to common pregnancy-related questions.</p>
+            </div>
+
+            <div class="feature-card">
+                <i class="fas fa-comments"></i>
+                <h3>Chat with Zoee</h3>
+                <p>Get instant answers and support from our chatbot.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const navLinks = document.querySelectorAll('nav a');
+        const currentPage = window.location.pathname.split('/').pop();
+
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === currentPage) {
+                link.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>
