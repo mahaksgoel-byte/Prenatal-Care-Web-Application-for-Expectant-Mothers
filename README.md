@@ -37,17 +37,29 @@ Users can:
 
 ## 📂 Project Structure
 ├── main.html
+
 ├── login.html
+
 ├── signup.html
+
 ├── calendar.html
+
 ├── health tracker page.html
+
 ├── NutriFit.html
+
 ├── journal.html
+
 ├── chatbot page.html
+
 ├── education.html
+
 ├── music and books page.html
+
 ├── faqs page.html
+
 ├── login.py
+
 └── users.db
 
 ## ⚙️ Installation & Setup
@@ -67,16 +79,19 @@ Server runs on: http://127.0.0.1:5000
 Open main.html or other pages via a local server (not directly from file://).
 
 🐞 Challenges Faced
-User Authentication Setup
+- User Authentication Setup
 Initially struggled to implement secure signup/login using SQLite.
 Resolved by designing proper database schemas with unique email constraints.
-Frontend–Backend Integration
+
+- Frontend–Backend Integration
 Forms weren’t sending data because the Flask backend wasn’t running or API paths were wrong.
 Fixed by aligning API routes and ensuring the backend server was active.
-CORS Issues
+
+- CORS Issues
 Fetch requests failed when opening HTML directly from the file system.
 Solved by adding flask-cors and serving the site from a local HTTP server.
-Database Path Errors
+
+- Database Path Errors
 Backend couldn’t locate users.db when run from different directories.
 Fixed by using absolute paths and consistent working directories.
 
