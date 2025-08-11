@@ -65,7 +65,7 @@ python login.py
 
 Server runs on: http://127.0.0.1:5000
 
-4. Open the Application
+5. Open the Application
 Open main.html or other pages via a local server (not directly from file://).
 
 🐞 Challenges Faced
@@ -86,11 +86,17 @@ Backend couldn’t locate users.db when run from different directories.
 Fixed by using absolute paths and consistent working directories.
 
 📸 Screenshots
-(Add screenshots of key pages here — dashboard, health tracker, chatbot, etc.)
+
+<img src="images/1.png" width="300" />
+<img src="images/2.png" width="300" />
+<img src="images/3.png" width="300" />
+<img src="images/4.png" width="300" />
+<img src="images/5.png" width="300" />
+<img src="images/6.png" width="300" />
 
 💡 Future Improvements
-Push notifications for appointment reminders.
-Encrypted password storage.
+- Push notifications for appointment reminders.
+- Encrypted password storage.
 
 📜 License
 This project is licensed under the Apache License.
